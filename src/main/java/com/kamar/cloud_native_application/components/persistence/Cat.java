@@ -1,4 +1,4 @@
-package com.kamar.cloud_native_application.persistence;
+package com.kamar.cloud_native_application.components.persistence;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,8 +1,7 @@
 package com.kamar.cloud_native_application;
 
-import com.kamar.cloud_native_application.persistence.Cat;
-import com.kamar.cloud_native_application.repositories.CatRepository;
-import org.aspectj.lang.annotation.Before;
+import com.kamar.cloud_native_application.components.persistence.Cat;
+import com.kamar.cloud_native_application.components.repositories.CatRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -26,6 +26,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
+    implementation("com.mysql:mysql-connector-j")
+
 
 
     runtimeOnly("com.h2database:h2")

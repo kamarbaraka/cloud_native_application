@@ -1,2 +1,7 @@
 ###
 GET {{host}}/cats
+
+###
+POST {{host}}/cat_add
+Content-Type: text/html
+

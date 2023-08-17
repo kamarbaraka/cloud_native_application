@@ -1,6 +1,6 @@
-package com.kamar.cloud_native_application.repositories;
+package com.kamar.cloud_native_application.components.repositories;
 
-import com.kamar.cloud_native_application.persistence.Cat;
+import com.kamar.cloud_native_application.components.persistence.Cat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
