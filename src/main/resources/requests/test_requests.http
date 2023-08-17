@@ -1,5 +1,5 @@
 ###
-GET {{host}}/cat_get ?catName=kamar
+GET {{host}}/cat_get ? cname=kamar
 
 ###
 POST {{host}}/cat_add
