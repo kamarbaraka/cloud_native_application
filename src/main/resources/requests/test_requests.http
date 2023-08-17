@@ -1,7 +1,16 @@
 ###
-GET {{host}}/cats
+GET {{host}}/cat_get ?catName=kamar
 
 ###
 POST {{host}}/cat_add
 Content-Type: text/html
 
+{"catName": "kamar"}
+
+###
+PUT {{host}}/cat_put
+Content-Type: application/json
+
+{
+"name": "kamar"
+}
