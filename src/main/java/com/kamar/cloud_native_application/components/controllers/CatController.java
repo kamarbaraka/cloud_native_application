@@ -2,11 +2,8 @@ package com.kamar.cloud_native_application.components.controllers;
 
 import com.kamar.cloud_native_application.components.repositories.CatRepository;
 import com.kamar.cloud_native_application.components.persistence.Cat;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +28,7 @@ public class CatController {
     @PostMapping(value = "/cat_add", consumes = {"application/hal+json", "application/json", "text/plain",
     "text/chars"},
     produces = {"application/json"})
-    @CrossOrigin(origins = {"http://localhost:63343/"}, methods = {RequestMethod.GET, RequestMethod.PUT,
-    RequestMethod.POST})
+    @CrossOrigin(origins = {"http://localhost:63343/"}, methods = {RequestMethod.POST})
     public HttpStatus addCat(@RequestBody Map<String , String> cat){
 
         String name = cat.get("name");
@@ -44,15 +40,17 @@ public class CatController {
 
     }
 
-    @GetMapping("/cat_get")
-    public Cat getCat(@RequestParam("name") String cname){
+    @GetMapping(value = "/cat_get", consumes = {"application/json", "text/plain"}, produces = {"application/json"})
+    @CrossOrigin(origins = {"http://localhost:63343/"}, methods = {RequestMethod.GET})
+    public List<Cat> getCat(@RequestParam("name") String name){
 
-        return catRepository.findCatByCatName(cname);
+        return catRepository.findCatsByCatName(name);
 
     }
 
 
-    @PutMapping("/cat_put")
+    @PutMapping(value = "/cat_put", consumes = {"application/json", "text/plain"})
+    @CrossOrigin(origins = {"http://localhost:63343/"}, methods = {RequestMethod.PUT})
     public HttpStatus putCat(@RequestParam("name") String catName, @RequestParam("age") String catAge){
 
         /*get the cat by name*/
