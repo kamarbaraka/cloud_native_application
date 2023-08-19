@@ -18,11 +18,26 @@ public class Cat {
 
     private String catName;
 
+    private String  catAge;
+
     public Cat(String catName) {
         this.catName = catName;
     }
 
+    public Cat(String catName, String  catAge){
+        this.catAge = catAge;
+        this.catName = catName;
+    }
+
     public Cat() {
+    }
+
+    public String  getCatAge() {
+        return catAge;
+    }
+
+    public void setCatAge(String  catAge) {
+        this.catAge = catAge;
     }
 
     public long getCatId() {

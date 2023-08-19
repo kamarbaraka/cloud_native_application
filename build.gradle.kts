@@ -28,7 +28,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
     implementation("com.mysql:mysql-connector-j")
-
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-context
+    implementation("org.springframework.cloud:spring-cloud-context:4.0.4")
 
 
     runtimeOnly("com.h2database:h2")
