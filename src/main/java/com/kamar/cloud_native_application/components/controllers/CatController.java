@@ -2,17 +2,24 @@ package com.kamar.cloud_native_application.components.controllers;
 
 import com.kamar.cloud_native_application.components.repositories.CatRepository;
 import com.kamar.cloud_native_application.components.persistence.Cat;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Map;
 
 /**
  * a cat controller class.
  * @author kamarbaraka.*/
 
 @RestController
+@ConditionalOnClass({CatRepository.class})
+@RequestMapping(value = "/api", consumes = {"application/hal+json", "application/json", "text/plain",
+"text/chars"})
 public class CatController {
 
     private final CatRepository catRepository;
@@ -21,43 +28,42 @@ public class CatController {
         this.catRepository = catRepository;
     }
 
-    @PostMapping("/cat_add")
-    public void addCat(String catName){
+    @PostMapping(value = "/cat_add", consumes = {"application/hal+json", "application/json", "text/plain",
+    "text/chars"},
+    produces = {"application/json"})
+    @CrossOrigin(origins = {"http://localhost:63343/"}, methods = {RequestMethod.GET, RequestMethod.PUT,
+    RequestMethod.POST})
+    public HttpStatus addCat(@RequestBody Map<String , String> cat){
 
-        this.catRepository.save(new Cat(catName));
+        String name = cat.get("name");
+        String age = cat.get("age");
+
+        catRepository.save(new Cat(name, age));
+
+        return HttpStatus.OK;
 
     }
 
     @GetMapping("/cat_get")
-    @ResponseBody
-    public List<Cat> getCat(String cname){
+    public Cat getCat(@RequestParam("name") String cname){
 
-        /*construct and persist several cats*/
-        Stream.of("kamar", "baraka", "kahindi").forEach(name -> catRepository.save(new Cat(name)));
+        return catRepository.findCatByCatName(cname);
 
-        List<Cat> catList = catRepository.findAll();
-//        List<String> foundCats = new ArrayList<>();
-
-        /*for (Cat cat :
-                catList) {
-            String catName = cat.getCatName();
-            if (catName.equals(cname))
-                return new ArrayList<>(List.of(cat.getCatName()));
-            foundCats.add(catName);
-        }
-        return foundCats;*/
-
-        catList.removeIf(cat -> !cat.getCatName().equals(cname));
-        return catList;
-
-//        return "cat name = %s, cat ID = %s".formatted(cat.getCatName(), cat.getCatId());
     }
 
+
     @PutMapping("/cat_put")
-    public String putCat(String name){
+    public HttpStatus putCat(@RequestParam("name") String catName, @RequestParam("age") String catAge){
 
-        this.catRepository.save(new Cat(name));
+        /*get the cat by name*/
+        Cat cat = this.catRepository.findCatByCatName(catName);
 
-        return "success";
+        /*update the cat's properties*/
+        cat.setCatAge(catAge);
+
+        /*save the updated cat*/
+        this.catRepository.save(cat);
+
+        return HttpStatus.OK;
     }
 }

@@ -2,15 +2,20 @@
 GET {{host}}/cat_get ? cname=kamar
 
 ###
-POST {{host}}/cat_add
-Content-Type: text/html
-
-{"catName": "kamar"}
-
-###
-PUT {{host}}/cat_put
+POST {{host}}/api/cat_add
 Content-Type: application/json
 
 {
-"name": "kamar"
+  "kamutu": 12,
+  "kamini": 7,
+  "stronjo": 5,
+  "kamar": 23
 }
+
+###
+PUT {{host}}/api/cat_put?name=kamar&age=46
+
+
+
+
+
