@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * a repository to manage and perform CRUD operations on cats.
+ * a rest repository to manage and perform CRUD operations on cats.
  * @author kamarbaraka.*/
 
 @RepositoryRestResource
