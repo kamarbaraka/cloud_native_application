@@ -19,4 +19,6 @@ public interface CatRepository extends CrudRepository<Cat, Long> {
 
     List<Cat> findCatsByCatName(String catName);
 
+    Cat findCatByCatIds(long... ids);
+
 }
